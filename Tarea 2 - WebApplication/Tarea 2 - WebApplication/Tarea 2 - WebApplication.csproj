@@ -69,6 +69,9 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="Pages\Index.aspx" />
+    <Content Include="Pages\Nosotros.aspx" />
+    <Content Include="Pages\Pedido.aspx" />
+    <Content Include="Pages\Producto.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -81,6 +84,27 @@
     </Compile>
     <Compile Include="Pages\Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Nosotros.aspx.cs">
+      <DependentUpon>Nosotros.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Nosotros.aspx.designer.cs">
+      <DependentUpon>Nosotros.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Pedido.aspx.cs">
+      <DependentUpon>Pedido.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Pedido.aspx.designer.cs">
+      <DependentUpon>Pedido.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Producto.aspx.cs">
+      <DependentUpon>Producto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Producto.aspx.designer.cs">
+      <DependentUpon>Producto.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Site1.Master.cs">
       <DependentUpon>Site1.Master</DependentUpon>

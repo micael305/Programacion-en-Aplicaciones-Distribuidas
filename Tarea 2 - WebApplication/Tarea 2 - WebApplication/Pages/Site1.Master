@@ -24,16 +24,16 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                            <a class="nav-link active" aria-current="page" href="Index.aspx">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Productos</a>
+                            <a class="nav-link" href="Producto.aspx">Productos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Realizar un pedido</a>
+                            <a class="nav-link" href="Pedido.aspx">Realizar un pedido</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Acerca de</a>
+                            <a class="nav-link" href="Nosotros.aspx">Acerca de</a>
                         </li>
                     </ul>
                 </div>
