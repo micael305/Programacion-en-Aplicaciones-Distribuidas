@@ -1,0 +1,12 @@
+Programar las siguientes clases. Crear un Main donde se prueben las mismas.
+Clase Persona: DNI, Nombre
+Clase Socio: Número de Socio. Es Persona.
+Clase Pelicula: Codigo, Nombre, Genero
+Clase Alquiler: Socio, Pelicula, FechaAlquiler, FechaDevolución
+VideoClub: Alquileres, Socios, Peliculas
+
+Programar:
+Encapsulamiento: Propiedad DNI, no permite números negativos. Programar set y get utilizando "=>"
+Herencia: Constructor Socio, llama al constructor de Persona
+Polimorfismo: En Alquiler, sobreescribir el método ToString() 
+VideoClub.MostrarAlquileresPendientes: Con LinqToSQL mostrar los alquileres que no tienen fecha de devolución.
