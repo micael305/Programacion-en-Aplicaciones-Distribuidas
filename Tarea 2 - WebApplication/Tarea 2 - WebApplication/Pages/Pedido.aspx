@@ -36,20 +36,20 @@
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <asp:Label ID="Label3" runat="server" Text="Email"></asp:Label>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:TextBox ID="TextBox3" runat="server" Enabled="False" Width="389px"></asp:TextBox>
+        <asp:TextBox ID="TextBoxEmail" runat="server" Enabled="False" Width="389px"></asp:TextBox>
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
         <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <asp:Label ID="Label6" runat="server" Text="Telefono"></asp:Label>
 &nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:TextBox ID="TextBox5" runat="server" Enabled="False" Width="228px"></asp:TextBox>
+        <asp:TextBox ID="TextBoxTelefono" runat="server" Enabled="False" Width="228px"></asp:TextBox>
         <br />
         <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <asp:Label ID="Label4" runat="server" Text="Dirección"></asp:Label>
 &nbsp;&nbsp;
-        <asp:TextBox ID="TextBox4" runat="server" Width="655px" Enabled="False"></asp:TextBox>
+        <asp:TextBox ID="TextBoxDireccion" runat="server" Width="655px" Enabled="False"></asp:TextBox>
 
 &nbsp;
         <br />
