@@ -4,7 +4,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
     <style type="text/css">
         #form1 {
-            height: 360px;
             margin-top: 28px;
         }
     </style>
@@ -55,26 +54,38 @@
         <br />
         <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:Button ID="Button1" runat="server" Enabled="False" Text="Registrarme" />
+        <asp:Button ID="ButtonRegistrar" runat="server" Enabled="False" Text="Registrarme" OnClick="ButtonRegistrar_Click" />
 
         <br />
 &nbsp;<h4>&nbsp; Añadir productos</h4>
         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:Label ID="Label7" runat="server" Text="Producto"></asp:Label>
 &nbsp;&nbsp;&nbsp;
-            <asp:ListBox ID="ListBox1" runat="server"></asp:ListBox>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:DropDownList ID="DropDownListProducto" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged1">
+            </asp:DropDownList>
+&nbsp;&nbsp;&nbsp;
             <asp:Label ID="Label8" runat="server" Text="Cantidad"></asp:Label>
+            &nbsp;
+            <asp:TextBox ID="TextBoxCantidad" runat="server"></asp:TextBox>
+            <br />
+            <br />
+            &nbsp;&nbsp;&nbsp;
+            <asp:Label ID="LabelPrecioUnitario" runat="server" Text="Precio unitario"></asp:Label>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:TextBox ID="TextBoxPrecioUnitario" runat="server" Width="108px" Enabled="False" OnTextChanged="TextBoxPrecioUnitario_TextChanged" ReadOnly="True"></asp:TextBox>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<asp:Label ID="LabelSubtotal" runat="server" Text="Subtotal:"></asp:Label>
 &nbsp;&nbsp;
-            <asp:TextBox ID="TextBox6" runat="server"></asp:TextBox>
-&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:Button ID="Button2" runat="server" Text="Agregar al carrito" />
+&nbsp;<asp:TextBox ID="TextBoxSubtotal" runat="server" Enabled="False"></asp:TextBox>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:Button ID="ButtonAgregarAlCarrito" runat="server" Text="Agregar al carrito" OnClick="Button2_Click" />
+            <asp:HiddenField ID="HiddenFieldPrecioUnitario" runat="server" />
         </p>
         <h4>&nbsp; Productos en el pedido</h4>
         <p>
-            <asp:GridView ID="GridView1" runat="server">
+            <asp:GridView ID="GridViewProductos" runat="server">
             </asp:GridView>
         </p>
-        <asp:Button ID="Button3" runat="server" Text="Confirmar pedido" />
+        <asp:Button ID="ButtonConfirmarPedido" runat="server" Text="Confirmar pedido" OnClick="ButtonConfirmarPedido_Click" />
 </form>
 </asp:Content>
