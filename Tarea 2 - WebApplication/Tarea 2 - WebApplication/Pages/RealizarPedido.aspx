@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Pages/Site1.Master" AutoEventWireup="true" CodeBehind="Pedido.aspx.cs" Inherits="Tarea_2___WebApplication.Pages.Pedido" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Pages/Site1.Master" AutoEventWireup="true" CodeBehind="RealizarPedido.aspx.cs" Inherits="Tarea_2___WebApplication.Pages.Pedido" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="title" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
@@ -81,10 +81,21 @@
             <asp:Button ID="ButtonAgregarAlCarrito" runat="server" Text="Agregar al carrito" OnClick="Button2_Click" Enabled="False" />
             <asp:HiddenField ID="HiddenFieldPrecioUnitario" runat="server" />
         </p>
-        <h4>&nbsp; Productos en el pedido</h4>
+        <h4>&nbsp;&nbsp; Productos en el pedido</h4>
         <p>
-            <asp:GridView ID="GridViewProductos" runat="server" Enabled="False">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:GridView ID="GridViewProductos" runat="server" Enabled="False" AutoGenerateColumns="False">
+                <Columns>
+        <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
+        <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" />
+        <asp:BoundField DataField="Precio" HeaderText="Precio" DataFormatString="{0:C}" />
+        <asp:BoundField DataField="Subtotal" HeaderText="Subtotal" DataFormatString="{0:C}" />
+    </Columns>
             </asp:GridView>
+            <br />
+        &nbsp;<asp:Label ID="LabelTotal" runat="server" Text="Total"></asp:Label>
+&nbsp;&nbsp;
+            <asp:TextBox ID="TextBoxTotal" runat="server" AutoCompleteType="Disabled" Enabled="False"></asp:TextBox>
         </p>
         <asp:Button ID="ButtonConfirmarPedido" runat="server" Text="Confirmar pedido" OnClick="ButtonConfirmarPedido_Click" Enabled="False" />
 </form>

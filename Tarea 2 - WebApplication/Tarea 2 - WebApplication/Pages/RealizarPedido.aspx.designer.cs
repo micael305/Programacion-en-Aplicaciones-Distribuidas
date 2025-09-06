@@ -249,6 +249,24 @@ namespace Tarea_2___WebApplication.Pages
         protected global::System.Web.UI.WebControls.GridView GridViewProductos;
 
         /// <summary>
+        /// Control LabelTotal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelTotal;
+
+        /// <summary>
+        /// Control TextBoxTotal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxTotal;
+
+        /// <summary>
         /// Control ButtonConfirmarPedido.
         /// </summary>
         /// <remarks>

@@ -74,8 +74,9 @@
     </Content>
     <Content Include="Global.asax" />
     <Content Include="Pages\Index.aspx" />
+    <Content Include="Pages\MisPedidos.aspx" />
     <Content Include="Pages\Nosotros.aspx" />
-    <Content Include="Pages\Pedido.aspx" />
+    <Content Include="Pages\RealizarPedido.aspx" />
     <Content Include="Pages\Producto.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -92,6 +93,13 @@
     <Compile Include="Pages\Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\MisPedidos.aspx.cs">
+      <DependentUpon>MisPedidos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\MisPedidos.aspx.designer.cs">
+      <DependentUpon>MisPedidos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Nosotros.aspx.cs">
       <DependentUpon>Nosotros.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -99,12 +107,12 @@
     <Compile Include="Pages\Nosotros.aspx.designer.cs">
       <DependentUpon>Nosotros.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Pedido.aspx.cs">
-      <DependentUpon>Pedido.aspx</DependentUpon>
+    <Compile Include="Pages\RealizarPedido.aspx.cs">
+      <DependentUpon>RealizarPedido.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\Pedido.aspx.designer.cs">
-      <DependentUpon>Pedido.aspx</DependentUpon>
+    <Compile Include="Pages\RealizarPedido.aspx.designer.cs">
+      <DependentUpon>RealizarPedido.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Producto.aspx.cs">
       <DependentUpon>Producto.aspx</DependentUpon>

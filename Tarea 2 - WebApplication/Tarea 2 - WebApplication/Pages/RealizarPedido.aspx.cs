@@ -51,13 +51,15 @@ namespace Tarea_2___WebApplication.Pages
 
         protected void ButtonRegistrar_Click(object sender, EventArgs e)
         {
-            string query = "insert into Cliente (DNI, Nombre, Apellido, Email) VALUES (@DNI, @Nombre, @Apellido, @Email)";
+            string query = "INSERT INTO Cliente (DNI, Nombre, Apellido, Email, Direccion, Telefono) VALUES (@DNI, @Nombre, @Apellido, @Email, @Direccion, @Telefono)";
             var conexion = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""C:\Users\Micae\source\repos\PAD\Tarea 2 - WebApplication\Tarea 2 - WebApplication\App_Data\Database1.mdf"";Integrated Security=True");
             var comando = new SqlCommand(query, conexion);
             comando.Parameters.AddWithValue("@DNI", TextBoxDNI.Text);
             comando.Parameters.AddWithValue("@Nombre", TextBoxNombre.Text);
             comando.Parameters.AddWithValue("@Apellido", TextBoxApellido.Text);
             comando.Parameters.AddWithValue("@Email", TextBoxEmail.Text);
+            comando.Parameters.AddWithValue("@Direccion", TextBoxDireccion.Text);
+            comando.Parameters.AddWithValue("@Telefono", TextBoxTelefono.Text);
 
             conexion.Open();
             int rowsAffected = comando.ExecuteNonQuery();
@@ -66,13 +68,15 @@ namespace Tarea_2___WebApplication.Pages
             {
                 MessageBox.Show("¡Cliente registrado con éxito!");
                 ActualizarCampos();
+                ActivarCargaProdctos();
             }
             else
             {
                 MessageBox.Show("Error al registrar el cliente. Intente de nuevo.");
             }
         }
-        #region Metodos auxiliares para actualizar formulario cliente
+
+        #region Metodos auxiliares 
         private void ActualizarCampos(SqlDataReader res = null)
         {
             if (res != null)
@@ -109,11 +113,12 @@ namespace Tarea_2___WebApplication.Pages
         }
 
         #endregion
+
         protected void DropDownList1_SelectedIndexChanged1(object sender, EventArgs e)
         {
             int IDProducto = Convert.ToInt32(DropDownListProducto.SelectedValue);
 
-            if (IDProducto > 0)
+            if (ValidarProducto())
             {
                 var conexion = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""C:\Users\Micae\source\repos\PAD\Tarea 2 - WebApplication\Tarea 2 - WebApplication\App_Data\Database1.mdf"";Integrated Security=True");
                 string query = "select Precio FROM Producto where IDProducto = @IDProducto";
@@ -133,7 +138,7 @@ namespace Tarea_2___WebApplication.Pages
             }
             else
             {
-                TextBoxPrecioUnitario.Text = string.Empty; // Limpiar el campo si se selecciona el ítem por defecto
+                TextBoxPrecioUnitario.Text = string.Empty;
             }
         }
 
@@ -158,8 +163,9 @@ namespace Tarea_2___WebApplication.Pages
 
         protected void Button2_Click(object sender, EventArgs e)
         {
-            if (!ValidarProductoYCantidad())
+            if (!ValidarProducto() || !ValidarCantidad())
             {
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Por favor, seleccione un producto y una cantidad (Entre 1 y 100).');", true);
                 return;
             }
 
@@ -170,8 +176,9 @@ namespace Tarea_2___WebApplication.Pages
                 IDProducto = int.Parse(DropDownListProducto.SelectedValue),
                 Nombre = DropDownListProducto.SelectedItem.Text,
                 Cantidad = int.Parse(TextBoxCantidad.Text),
-                PrecioUnitario = decimal.Parse(HiddenFieldPrecioUnitario.Value),
+                Precio = decimal.Parse(HiddenFieldPrecioUnitario.Value),
             };
+
 
             List<ItemCarrito> carrito;
             if (Session["Carrito"] == null)
@@ -186,31 +193,36 @@ namespace Tarea_2___WebApplication.Pages
 
             carrito.Add(itemCarrito);
 
+
+
             GridViewProductos.DataSource = carrito;
             GridViewProductos.DataBind();
 
             LimpiarCamposProducto();
+            TextBoxTotal.Text = ((List<ItemCarrito>)Session["Carrito"]).Sum(item => item.Subtotal).ToString();
+            ButtonConfirmarPedido.Enabled = true;
         }
 
         #region metodos auxiliares de Agregar Producto al Carrito
-        private bool ValidarProductoYCantidad()
+        private bool ValidarProducto()
         {
             // Validar que se haya seleccionado un producto
             int idProducto = 0;
             if (!int.TryParse(DropDownListProducto.SelectedValue, out idProducto) || idProducto == 0)
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Por favor, seleccione un producto.');", true);
                 return false;
             }
 
+            return true;
+        }
+        private bool ValidarCantidad()
+        {
             // Validar la cantidad ingresada
             int cantidad = 0;
             if (!int.TryParse(TextBoxCantidad.Text, out cantidad) || cantidad <= 0 || cantidad > 100)
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Por favor, ingrese una cantidad válida (Entre 1 y 100).');", true);
                 return false;
             }
-
             return true;
         }
         private void LimpiarCamposProducto()
@@ -239,7 +251,6 @@ namespace Tarea_2___WebApplication.Pages
             decimal total = ((List<ItemCarrito>)Session["Carrito"]).Sum(item => item.Subtotal);
             comando.Parameters.AddWithValue("@Total", total);
 
-
             string queryDetalle = "INSERT INTO PedidoProducto (IDPedido, IDProducto, Cantidad, PrecioUnitario) VALUES (@IDPedido, @IDProducto, @Cantidad, @PrecioUnitario)";
             var comandoDetalle = new SqlCommand(queryDetalle, conexion, transaction);
 
@@ -252,7 +263,7 @@ namespace Tarea_2___WebApplication.Pages
                 comandoDetalle.Parameters.AddWithValue("@IDPedido", idPedido);
                 comandoDetalle.Parameters.AddWithValue("@IDProducto", item.IDProducto);
                 comandoDetalle.Parameters.AddWithValue("@Cantidad", item.Cantidad);
-                comandoDetalle.Parameters.AddWithValue("@PrecioUnitario", item.PrecioUnitario);
+                comandoDetalle.Parameters.AddWithValue("@PrecioUnitario", item.Precio);
                 comandoDetalle.ExecuteNonQuery();
             }
 
