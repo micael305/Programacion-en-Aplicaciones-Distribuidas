@@ -62,12 +62,12 @@
             <asp:Label ID="Label7" runat="server" Text="Producto"></asp:Label>
 &nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:DropDownList ID="DropDownListProducto" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged1">
+            <asp:DropDownList ID="DropDownListProducto" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged1" Enabled="False">
             </asp:DropDownList>
 &nbsp;&nbsp;&nbsp;
             <asp:Label ID="Label8" runat="server" Text="Cantidad"></asp:Label>
             &nbsp;
-            <asp:TextBox ID="TextBoxCantidad" runat="server"></asp:TextBox>
+            <asp:TextBox ID="TextBoxCantidad" runat="server" Enabled="False"></asp:TextBox>
             <br />
             <br />
             &nbsp;&nbsp;&nbsp;
@@ -78,14 +78,14 @@
 &nbsp;&nbsp;
 &nbsp;<asp:TextBox ID="TextBoxSubtotal" runat="server" Enabled="False"></asp:TextBox>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:Button ID="ButtonAgregarAlCarrito" runat="server" Text="Agregar al carrito" OnClick="Button2_Click" />
+            <asp:Button ID="ButtonAgregarAlCarrito" runat="server" Text="Agregar al carrito" OnClick="Button2_Click" Enabled="False" />
             <asp:HiddenField ID="HiddenFieldPrecioUnitario" runat="server" />
         </p>
         <h4>&nbsp; Productos en el pedido</h4>
         <p>
-            <asp:GridView ID="GridViewProductos" runat="server">
+            <asp:GridView ID="GridViewProductos" runat="server" Enabled="False">
             </asp:GridView>
         </p>
-        <asp:Button ID="ButtonConfirmarPedido" runat="server" Text="Confirmar pedido" OnClick="ButtonConfirmarPedido_Click" />
+        <asp:Button ID="ButtonConfirmarPedido" runat="server" Text="Confirmar pedido" OnClick="ButtonConfirmarPedido_Click" Enabled="False" />
 </form>
 </asp:Content>

@@ -38,6 +38,7 @@ namespace Tarea_2___WebApplication.Pages
             if (res.Read())
             {
                 ActualizarCampos(res);
+                ActivarCargaProdctos();
             }
             else
             {
@@ -100,6 +101,13 @@ namespace Tarea_2___WebApplication.Pages
             TextBoxDireccion.Enabled = true;
             ButtonRegistrar.Enabled = true;
         }
+        private void ActivarCargaProdctos()
+        {
+            DropDownListProducto.Enabled = true;
+            TextBoxCantidad.Enabled = true;
+            ButtonAgregarAlCarrito.Enabled = true;
+        }
+
         #endregion
         protected void DropDownList1_SelectedIndexChanged1(object sender, EventArgs e)
         {
