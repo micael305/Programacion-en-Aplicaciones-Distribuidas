@@ -51,12 +51,21 @@ namespace Tarea_2___WebApplication.Pages
         protected global::System.Web.UI.WebControls.Button ButtonBuscar;
 
         /// <summary>
-        /// Control Label1.
+        /// Control GridViewPedidos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.GridView GridViewPedidos;
+
+        /// <summary>
+        /// Control GridViewDetallePedido.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridViewDetallePedido;
     }
 }
