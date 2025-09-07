@@ -32,22 +32,32 @@ namespace Tarea_2___WebApplication.Pages
 
             comando.Parameters.AddWithValue("@DNI", dni);
 
-            conexion.Open();
-            var res = comando.ExecuteReader();
-
-            if (res.Read())
+            try
             {
-                ActualizarCampos(res);
-                ActivarCargaProdctos();
-            }
-            else
-            {
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Cliente no encontrado. Por favor, complete sus datos para registrarse.');", true);
-                ActivarCamposCliente();
-            }
-            conexion.Close();
+                conexion.Open();
+                var res = comando.ExecuteReader();
 
+                if (res.Read())
+                {
+                    ActualizarCampos(res);
+                    ActivarCargaProdctos();
+                }
+                else
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Cliente no encontrado. Por favor, complete sus datos para registrarse.');", true);
+                    ActivarCamposCliente();
+                }
+            }
+            catch (Exception ex)
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('Error al buscar cliente: {ex.Message}');", true);
+            }
+            finally
+            {
+                conexion.Close();
+            }
         }
+
 
         protected void ButtonRegistrar_Click(object sender, EventArgs e)
         {
@@ -61,18 +71,29 @@ namespace Tarea_2___WebApplication.Pages
             comando.Parameters.AddWithValue("@Direccion", TextBoxDireccion.Text);
             comando.Parameters.AddWithValue("@Telefono", TextBoxTelefono.Text);
 
-            conexion.Open();
-            int rowsAffected = comando.ExecuteNonQuery();
+            try
+            {
+                conexion.Open();
+                int rowsAffected = comando.ExecuteNonQuery();
 
-            if (rowsAffected > 0)
-            {
-                MessageBox.Show("¡Cliente registrado con éxito!");
-                ActualizarCampos();
-                ActivarCargaProdctos();
+                if (rowsAffected > 0)
+                {
+                    MessageBox.Show("¡Cliente registrado con éxito!");
+                    ActualizarCampos();
+                    ActivarCargaProdctos();
+                }
+                else
+                {
+                    MessageBox.Show("Error al registrar el cliente. Intente de nuevo.");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Error al registrar el cliente. Intente de nuevo.");
+                MessageBox.Show($"Error al registrar el cliente: {ex.Message}");
+            }
+            finally
+            {
+                conexion.Close();
             }
         }
 
@@ -125,15 +146,27 @@ namespace Tarea_2___WebApplication.Pages
                 var comando = new SqlCommand(query, conexion);
 
                 comando.Parameters.AddWithValue("@IDProducto", IDProducto);
-                conexion.Open();
 
-                var res = comando.ExecuteScalar();
-
-                if (res != null)
+                try
                 {
-                    decimal precio = Convert.ToDecimal(res);
-                    TextBoxPrecioUnitario.Text = precio.ToString("C");
-                    HiddenFieldPrecioUnitario.Value = precio.ToString();
+                    conexion.Open();
+
+                    var res = comando.ExecuteScalar();
+
+                    if (res != null)
+                    {
+                        decimal precio = Convert.ToDecimal(res);
+                        TextBoxPrecioUnitario.Text = precio.ToString("C");
+                        HiddenFieldPrecioUnitario.Value = precio.ToString();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('Error al obtener el precio del producto: {ex.Message}');", true);
+                }
+                finally
+                {
+                    conexion.Close();
                 }
             }
             else
@@ -148,17 +181,27 @@ namespace Tarea_2___WebApplication.Pages
             string query = "select IDProducto, Nombre from Producto";
             var comando = new SqlCommand(query, conexion);
 
-            conexion.Open();
+            try
+            {
+                conexion.Open();
+                var res = comando.ExecuteReader();
 
-            var res = comando.ExecuteReader();
+                DropDownListProducto.DataSource = res;
+                DropDownListProducto.DataTextField = "Nombre";
+                DropDownListProducto.DataValueField = "IDProducto";
+                DropDownListProducto.DataBind();
 
-            DropDownListProducto.DataSource = res;
-            DropDownListProducto.DataTextField = "Nombre";
-            DropDownListProducto.DataValueField = "IDProducto";
-            DropDownListProducto.DataBind();
-
-            //Agregar un item por defecto
-            DropDownListProducto.Items.Insert(0, new ListItem("Seleccione un producto", "0"));
+                //Agregar un item por defecto
+                DropDownListProducto.Items.Insert(0, new ListItem("Seleccione un producto", "0"));
+            }
+            catch (Exception ex)
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('Error al cargar productos: {ex.Message}');", true);
+            }
+            finally
+            {
+                conexion.Close();
+            }
         }
 
         protected void Button2_Click(object sender, EventArgs e)
@@ -192,8 +235,6 @@ namespace Tarea_2___WebApplication.Pages
             }
 
             carrito.Add(itemCarrito);
-
-
 
             GridViewProductos.DataSource = carrito;
             GridViewProductos.DataBind();
@@ -240,45 +281,56 @@ namespace Tarea_2___WebApplication.Pages
             var conexion = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""C:\Users\Micae\source\repos\PAD\Tarea 2 - WebApplication\Tarea 2 - WebApplication\App_Data\Database1.mdf"";Integrated Security=True");
             SqlTransaction transaction = null;
 
-            conexion.Open();
-            transaction = conexion.BeginTransaction();
-
-            string query = "INSERT INTO Pedido (FechaPedido, DNICliente, Total) VALUES (@Fecha, @DNICliente, @Total); SELECT SCOPE_IDENTITY();";
-            var comando = new SqlCommand(query, conexion, transaction);
-            comando.Parameters.AddWithValue("@Fecha", DateTime.Now);
-            comando.Parameters.AddWithValue("@DNICliente", TextBoxDNI.Text);
-
-            decimal total = ((List<ItemCarrito>)Session["Carrito"]).Sum(item => item.Subtotal);
-            comando.Parameters.AddWithValue("@Total", total);
-
-            string queryDetalle = "INSERT INTO PedidoProducto (IDPedido, IDProducto, Cantidad, PrecioUnitario) VALUES (@IDPedido, @IDProducto, @Cantidad, @PrecioUnitario)";
-            var comandoDetalle = new SqlCommand(queryDetalle, conexion, transaction);
-
-            int idPedido = Convert.ToInt32(comando.ExecuteScalar());
-
-            List<ItemCarrito> carrito = (List<ItemCarrito>)Session["Carrito"];
-            foreach (var item in carrito)
+            try
             {
-                comandoDetalle.Parameters.Clear();
-                comandoDetalle.Parameters.AddWithValue("@IDPedido", idPedido);
-                comandoDetalle.Parameters.AddWithValue("@IDProducto", item.IDProducto);
-                comandoDetalle.Parameters.AddWithValue("@Cantidad", item.Cantidad);
-                comandoDetalle.Parameters.AddWithValue("@PrecioUnitario", item.Precio);
-                comandoDetalle.ExecuteNonQuery();
+                conexion.Open();
+                transaction = conexion.BeginTransaction();
+
+                string query = "INSERT INTO Pedido (FechaPedido, DNICliente, Total) VALUES (@Fecha, @DNICliente, @Total); SELECT SCOPE_IDENTITY();";
+                var comando = new SqlCommand(query, conexion, transaction);
+                comando.Parameters.AddWithValue("@Fecha", DateTime.Now);
+                comando.Parameters.AddWithValue("@DNICliente", TextBoxDNI.Text);
+
+                decimal total = ((List<ItemCarrito>)Session["Carrito"]).Sum(item => item.Subtotal);
+                comando.Parameters.AddWithValue("@Total", total);
+
+                string queryDetalle = "INSERT INTO PedidoProducto (IDPedido, IDProducto, Cantidad, PrecioUnitario) VALUES (@IDPedido, @IDProducto, @Cantidad, @PrecioUnitario)";
+                var comandoDetalle = new SqlCommand(queryDetalle, conexion, transaction);
+
+                int idPedido = Convert.ToInt32(comando.ExecuteScalar());
+
+                List<ItemCarrito> carrito = (List<ItemCarrito>)Session["Carrito"];
+                foreach (var item in carrito)
+                {
+                    comandoDetalle.Parameters.Clear();
+                    comandoDetalle.Parameters.AddWithValue("@IDPedido", idPedido);
+                    comandoDetalle.Parameters.AddWithValue("@IDProducto", item.IDProducto);
+                    comandoDetalle.Parameters.AddWithValue("@Cantidad", item.Cantidad);
+                    comandoDetalle.Parameters.AddWithValue("@PrecioUnitario", item.Precio);
+                    comandoDetalle.ExecuteNonQuery();
+                }
+
+                transaction.Commit();
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Pedido confirmado con éxito. Su número de pedido es: " + idPedido + "');", true);
+
+                // 4. Limpiar el carrito y la GridView
+                Session["Carrito"] = null;
+                GridViewProductos.DataSource = null;
+                GridViewProductos.DataBind();
+
+                // 4. Limpiar el carrito y la GridView
+                Session["Carrito"] = null;
+                GridViewProductos.DataSource = null;
+                GridViewProductos.DataBind();
             }
-
-            transaction.Commit();
-            ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Pedido confirmado con éxito. Su número de pedido es: " + idPedido + "');", true);
-
-            // 4. Limpiar el carrito y la GridView
-            Session["Carrito"] = null;
-            GridViewProductos.DataSource = null;
-            GridViewProductos.DataBind();
-
-            // 4. Limpiar el carrito y la GridView
-            Session["Carrito"] = null;
-            GridViewProductos.DataSource = null;
-            GridViewProductos.DataBind();
+            catch (Exception ex)
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('Error al confirmar el pedido: {ex.Message}');", true);
+            }
+            finally
+            {
+                conexion.Close();
+            }
         }
 
 
