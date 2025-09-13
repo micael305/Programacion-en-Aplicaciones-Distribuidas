@@ -2,15 +2,16 @@
     var db = Database.Open("Database");
     try
     {
-        db.Execute("CREATE TABLE Noticia (Id INT IDENTITY(1,1) PRIMARY KEY, Titulo NVARCHAR(255), Resumen NVARCHAR(MAX), Texto NVARCHAR(MAX), Fecha DATETIME)");
+        db.Execute("CREATE TABLE Noticias (Id INT IDENTITY(1,1) PRIMARY KEY, Titulo NVARCHAR(100), Resumen NVARCHAR(200), Texto NVARCHAR(500), Fecha DATETIME)");
 
-        db.Execute("INSERT INTO Noticia (Titulo, Resumen, Texto, Fecha) VALUES (@0, @1, @2, @3)", "Título de la Noticia 1", "Este es el resumen de la primera noticia del día.", "Este es el texto completo de la primera noticia. Aquí se detalla todo el contenido.", DateTime.Now);
-        db.Execute("INSERT INTO Noticia (Titulo, Resumen, Texto, Fecha) VALUES (@0, @1, @2, @3)", "Título de la Noticia 2", "Un breve resumen de la segunda noticia del día.", "Aquí tienes el texto completo de la segunda noticia para que la leas con detalle.", DateTime.Now);
+        db.Execute("INSERT INTO Noticias (Titulo, Resumen, Texto, Fecha) VALUES (@0, @1, @2, @3)", "Título de la Noticia 1", "Este es el resumen de la primera noticia del día.", "Este es el texto completo de la primera noticia. Aquí se detalla todo el contenido.", DateTime.Now);
+        db.Execute("INSERT INTO Noticias (Titulo, Resumen, Texto, Fecha) VALUES (@0, @1, @2, @3)", "Título de la Noticia 2", "Un breve resumen de la segunda noticia del día.", "Aquí tienes el texto completo de la segunda noticia para que la leas con detalle.", DateTime.Now);
 
-        db.Execute("INSERT INTO Noticia (Titulo, Resumen, Texto, Fecha) VALUES (@0, @1, @2, @3)", "Noticia de ayer", "Esta es una noticia de un día anterior.", "Texto completo de la noticia de ayer.", DateTime.Now.AddDays(-1));
+        db.Execute("INSERT INTO Noticias (Titulo, Resumen, Texto, Fecha) VALUES (@0, @1, @2, @3)", "Noticia de ayer", "Esta es una noticia de un día anterior.", "Texto completo de la noticia de ayer.", DateTime.Now.AddDays(-1));
+        db.Execute("INSERT INTO Noticias (Titulo, Resumen, Texto, Fecha) VALUES (@0, @1, @2, @3)", "Noticia de anteayer", "Esta es una noticia hace dos dias.", "Texto completo de la noticia de ayer.", DateTime.Now.AddDays(-2));
     }
     catch (Exception)
     {
-        // Si la tabla ya existe, no hacemos nada.
+        // Si la tabla ya existe, no hacemos nada. 
     }
 }

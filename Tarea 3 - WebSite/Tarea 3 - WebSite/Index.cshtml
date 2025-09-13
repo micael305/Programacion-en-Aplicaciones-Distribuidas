@@ -4,7 +4,7 @@
 
     var db = Database.Open("Database");
     var hoy = DateTime.Today;
-    var noticias = db.Query("SELECT Id, Titulo, Resumen FROM Noticia WHERE Fecha >= @0 AND Fecha < @1 ORDER BY Fecha DESC", hoy, hoy.AddDays(1));
+    var noticias = db.Query("SELECT Id, Titulo, Resumen FROM Noticias WHERE Fecha >= @0 AND Fecha < @1 ORDER BY Fecha DESC", hoy, hoy.AddDays(1));
 }
 
 <h2>Últimas noticias</h2>
