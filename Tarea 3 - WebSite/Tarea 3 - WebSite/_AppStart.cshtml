@@ -2,16 +2,19 @@
     var db = Database.Open("Database");
     try
     {
-        db.Execute("CREATE TABLE Noticias (Id INT IDENTITY(1,1) PRIMARY KEY, Titulo NVARCHAR(100), Resumen NVARCHAR(200), Texto NVARCHAR(500), Fecha DATETIME)");
+        db.Execute("CREATE TABLE Noticias (Id INT IDENTITY(1,1) PRIMARY KEY, Titulo NVARCHAR(255), Resumen NVARCHAR(500), Texto NVARCHAR(1000), Fecha DATE)");
 
-        db.Execute("INSERT INTO Noticias (Titulo, Resumen, Texto, Fecha) VALUES (@0, @1, @2, @3)", "Título de la Noticia 1", "Este es el resumen de la primera noticia del día.", "Este es el texto completo de la primera noticia. Aquí se detalla todo el contenido.", DateTime.Now);
-        db.Execute("INSERT INTO Noticias (Titulo, Resumen, Texto, Fecha) VALUES (@0, @1, @2, @3)", "Título de la Noticia 2", "Un breve resumen de la segunda noticia del día.", "Aquí tienes el texto completo de la segunda noticia para que la leas con detalle.", DateTime.Now);
+        db.Execute("INSERT INTO Noticias (Titulo, Resumen, Texto, Fecha) VALUES (@0, @1, @2, @3)", "Tecnología: Lanzan un nuevo cohete que promete revolucionar la industria espacial", "La empresa privada 'SpaceX' ha presentado su nuevo prototipo, 'Falcon-X', diseñado para reducir costos de lanzamiento en un 50%.", "La presentación oficial se realizó esta mañana en Cabo Cañaveral. Expertos afirman que este avance podría abrir las puertas a misiones interplanetarias comerciales en la próxima década. El diseño del cohete utiliza materiales ligeros y un sistema de propulsión más eficiente.", DateTime.Now);
 
-        db.Execute("INSERT INTO Noticias (Titulo, Resumen, Texto, Fecha) VALUES (@0, @1, @2, @3)", "Noticia de ayer", "Esta es una noticia de un día anterior.", "Texto completo de la noticia de ayer.", DateTime.Now.AddDays(-1));
-        db.Execute("INSERT INTO Noticias (Titulo, Resumen, Texto, Fecha) VALUES (@0, @1, @2, @3)", "Noticia de anteayer", "Esta es una noticia hace dos dias.", "Texto completo de la noticia de ayer.", DateTime.Now.AddDays(-2));
+        db.Execute("INSERT INTO Noticias (Titulo, Resumen, Texto, Fecha) VALUES (@0, @1, @2, @3)", "Política: Aprueban ley de presupuesto con amplio consenso", "El proyecto de ley de presupuesto fue aprobado en el Congreso con 230 votos a favor, tras intensas negociaciones que lograron sumar el apoyo de la oposición.", "El ministro de economía, Juan Pérez, destacó la importancia de la ley para estabilizar la economía y financiar proyectos de infraestructura clave. La norma incluye recortes en gastos no esenciales y un aumento en la inversión en salud y educación.", DateTime.Now);
+
+        db.Execute("INSERT INTO Noticias (Titulo, Resumen, Texto, Fecha) VALUES (@0, @1, @2, @3)", "Deportes: El equipo local avanza a la final del campeonato", "En un partido emocionante, el equipo de fútbol 'Los Cóndores' venció 3 a 2 a su rival y se clasificó para la final de la liga. El gol de la victoria llegó en el último minuto.", "El entrenador, Carlos Gómez, elogió el espíritu de equipo y la garra de sus jugadores. La final se jugará el próximo sábado en el estadio principal, y se espera un lleno total.", DateTime.Now.AddDays(-1));
+
+        db.Execute("INSERT INTO Noticias (Titulo, Resumen, Texto, Fecha) VALUES (@0, @1, @2, @3)", "Cultura: Artista local inaugura exposición de arte digital", "La reconocida pintora Sofía Ramírez presenta una colección de obras interactivas que exploran la relación entre la tecnología y la naturaleza.", "La exposición, titulada 'Reflejos del Futuro', estará abierta al público durante todo el mes en el Centro de Arte Contemporáneo. Las obras, creadas con inteligencia artificial, invitan al espectador a interactuar con ellas a través de sensores de movimiento.", DateTime.Now.AddDays(-2));
     }
     catch (Exception)
     {
-        // Si la tabla ya existe, no hacemos nada. 
+
     }
+    // La tabla ya existe, no hacemos nada.
 }

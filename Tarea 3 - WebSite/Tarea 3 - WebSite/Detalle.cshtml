@@ -1,35 +1,23 @@
 ﻿@{
     Layout = "~/_SiteLayout.cshtml";
-    Page.Title = "About";
+    var noticiaId = Request["id"].AsInt();
+    if (noticiaId == 0)
+    {
+        Response.Redirect("~/");
+    }
+
+    var db = Database.Open("Database");
+    var noticia = db.QuerySingle("SELECT * FROM Noticias WHERE Id = @0", noticiaId);
 }
 
-<hgroup class="title">
-    <h1>@Page.Title.</h1>
-    <h2>Your app description page.</h2>
-</hgroup>
-
-<article>
-    <p>
-        Use this area to provide additional information.
-    </p>
-
-    <p>
-        Use this area to provide additional information.
-    </p>
-
-    <p>
-        Use this area to provide additional information.
-    </p>
-</article>
-
-<aside>
-    <h3>Aside Title</h3>
-    <p>
-        Use this area to provide additional information.
-    </p>
-    <ul>
-        <li><a href="~/">Home</a></li>
-        <li><a href="~/About">About</a></li>
-        <li><a href="~/Contact">Contact</a></li>
-    </ul>
-</aside>
+@if (noticia != null)
+{
+    <h2>@noticia.Titulo</h2>
+    <p>@noticia.Fecha.ToString("dd/MM/yyyy")</p>
+    <p>@noticia.Texto</p>
+    <a href="~/">Volver a la lista de noticias</a>
+}
+else
+{
+    <p>Noticia no encontrada.</p>
+}
