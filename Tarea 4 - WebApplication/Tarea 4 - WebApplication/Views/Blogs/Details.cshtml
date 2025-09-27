@@ -1,42 +1,51 @@
 ﻿@model Tarea_4___WebApplication.Blogs
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalles del Blog";
 }
 
-<h2>Details</h2>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-9">
+            <h2 class="mb-4 text-info">Detalles de la Entrada</h2>
 
-<div>
-    <h4>Blogs</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Titulo)
-        </dt>
+            <div class="card shadow-lg">
+                <div class="card-header bg-info text-white">
+                    <h3 class="mb-0">@Model.Titulo</h3>
+                </div>
+                <div class="card-body">
 
-        <dd>
-            @Html.DisplayFor(model => model.Titulo)
-        </dd>
+                    <dl class="row mb-0">
+                        <dt class="col-sm-3 fw-bold">
+                            @Html.DisplayNameFor(model => model.Titulo)
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(model => model.Titulo)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Contenido)
-        </dt>
+                        <dt class="col-sm-3 fw-bold">
+                            @Html.DisplayNameFor(model => model.Contenido)
+                        </dt>
+                        <dd class="col-sm-9">
+                            <p class="card-text border p-3 rounded bg-light">
+                                @Html.DisplayFor(model => model.Contenido)
+                            </p>
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Contenido)
-        </dd>
+                        <dt class="col-sm-3 fw-bold">
+                            @Html.DisplayNameFor(model => model.FechaCreacion)
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(model => model.FechaCreacion)
+                        </dd>
+                    </dl>
+                </div>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.FechaCreacion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FechaCreacion)
-        </dd>
-
-    </dl>
+            <div class="mt-4">
+                @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning me-2" })
+                @Html.ActionLink("Volver a la Lista", "Index", null, new { @class = "btn btn-outline-secondary" })
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

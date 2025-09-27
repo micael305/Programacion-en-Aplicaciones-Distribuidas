@@ -1,48 +1,57 @@
 ﻿@model Tarea_4___WebApplication.Blogs
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Eliminar Blog";
 }
 
-<h2>Delete</h2>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <h2 class="text-danger mb-4">Confirmar Eliminación</h2>
+            <h3 class="alert alert-warning" role="alert">
+                ¿Estás seguro de que quieres eliminar esta entrada? Esta acción es irreversible.
+            </h3>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Blogs</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Titulo)
-        </dt>
+            <div class="card border-danger mb-4">
+                <div class="card-header bg-danger text-white">
+                    Entrada a Eliminar: @Model.Titulo
+                </div>
+                <div class="card-body">
 
-        <dd>
-            @Html.DisplayFor(model => model.Titulo)
-        </dd>
+                    <dl class="row">
+                        <dt class="col-sm-3 fw-bold">
+                            @Html.DisplayNameFor(model => model.Titulo)
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(model => model.Titulo)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Contenido)
-        </dt>
+                        <dt class="col-sm-3 fw-bold">
+                            @Html.DisplayNameFor(model => model.Contenido)
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(model => model.Contenido)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Contenido)
-        </dd>
+                        <dt class="col-sm-3 fw-bold">
+                            @Html.DisplayNameFor(model => model.FechaCreacion)
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(model => model.FechaCreacion)
+                        </dd>
+                    </dl>
+                </div>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.FechaCreacion)
-        </dt>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
-        <dd>
-            @Html.DisplayFor(model => model.FechaCreacion)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+                <div class="d-flex justify-content-between mt-4">
+                    <input type="submit" value="Eliminar" class="btn btn-danger btn-lg" />
+                    @Html.ActionLink("Volver a la Lista", "Index", null, new { @class = "btn btn-outline-secondary" })
+                </div>
+            }
         </div>
-    }
+    </div>
 </div>
