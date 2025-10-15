@@ -1,0 +1,33 @@
+﻿@inject HttpClient Http
+<div>
+    <h4>Pokemon: @nombre</h4>
+
+    @if (resultado != null)
+    {
+        <div>Peso: @resultado.weight</div>
+        <img src="@resultado.sprites.front_default" />
+    }
+</div>
+@code {
+    [Parameter]
+    public string? nombre { get; set; }
+    ResultadoPokemon? resultado { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        resultado = await Http.GetFromJsonAsync<ResultadoPokemon>(
+            $"https://pokeapi.co/api/v2/pokemon/{nombre}");
+    }
+
+    class ResultadoPokemon
+    {
+        public string? name { get; set; }
+        public int height { get; set; } 
+        public int weight { get; set; } 
+        public Sprites? sprites { get; set; }
+    }
+    class Sprites
+    {
+        public string? front_default { get; set; }
+    }
+}

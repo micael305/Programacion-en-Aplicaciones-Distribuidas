@@ -1,0 +1,40 @@
+﻿@page "/listadopersonajes"
+@inject HttpClient Http
+
+<h3>ListadoPersonajes</h3>
+
+@if (resultado != null)
+{
+    @foreach (Personaje p in resultado.results)
+    {
+        <div>
+            @p.id.
+            @p.name
+            <div>
+                <img src=@p.image/>
+            </div>
+        </div>
+    }
+}
+
+@code {
+    private Resultado? resultado; // Declaración de la propiedad a nivel de clase
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Asignación del valor a la propiedad de la clase
+        resultado = await Http.GetFromJsonAsync<Resultado>("https://rickandmortyapi.com/api/character");
+    }
+
+    public class Resultado
+    {
+        public Personaje[]? results { get; set; }
+    }
+
+    public class Personaje
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+        public string image { get; set; }
+    }
+}
