@@ -1,0 +1,52 @@
+﻿@page "/"
+@using Tarea_5___BlazorApp.Shared
+
+<PageTitle>Home</PageTitle>
+
+
+<div class="max-w-2xl mx-auto p-6">
+
+    <div class="mb-6">
+        <label for="date-picker" class="block font-medium text-gray-700 mb-2">Selecciona un día:</label>
+        <input type="date" id="date-picker" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500">
+    </div>
+
+    <h4 class="font-semibold text-gray-700 mb-3">Añadir nueva tarea</h4>
+    <form id="add-event-form" class="flex flex-col sm:flex-row gap-3">
+        <input type="text" id="event-title" placeholder="Título de la tarea" class="flex-grow p-2 border rounded-md focus:ring-2 focus:ring-indigo-500" required>
+        <input type="time" id="event-time" class="p-2 border rounded-md focus:ring-2 focus:ring-indigo-500" required>
+        <button type="submit" class="bg-indigo-600 text-white font-semibold px-4 py-2 rounded-md hover:bg-indigo-700 shadow-sm">
+            <i class="fas fa-plus mr-2"></i>Añadir
+        </button>
+    </form>
+
+
+</div>
+
+ <h3 class="mt-4">Tareas Pendientes</h3>
+
+@if (Tareas.Any())
+{
+    <ul class="list-group">
+        @foreach (var tarea in Tareas)
+        {
+            <Tarea Tarea="tarea" />
+        }
+    </ul>
+}
+
+@code {
+    private List<TareaModel> Tareas = new();
+    protected override void OnInitialized()
+    {
+        Tareas = new List<TareaModel>
+        {
+            new TareaModel { Id = 1, Nombre = "Aprender componentes Blazor", Completada = true },
+            new TareaModel { Id = 2, Nombre = "Crear un modelo de datos" },
+            new TareaModel { Id = 3, Nombre = "Integrar el componente en la página Home" }
+        };
+    }
+}
+
+
+
