@@ -8,13 +8,18 @@
         </div>
     </div>
 
-    <div class="item-actions">
-        <button class="btn btn-sm btn btn-secondary" title="Editar">Editar</button>
-        <button class="btn btn-sm btn-danger ms-2" title="Eliminar" aria-label="Eliminar tarea">&times;</button>
+    <div class="tarea-right">
+        <div class="task-datetime">
+            @tarea.FechaHora?.ToString("g")
+        </div>
+        <div class="item-actions">
+            <button class="btn btn-sm btn-secondary" title="Editar">Editar</button>
+            <button class="btn btn-sm btn-danger ms-2" title="Eliminar" aria-label="Eliminar tarea">&times;</button>
+        </div>
     </div>
 </li>
 
 @code {
     [Parameter]
     public TareaModel tarea { get; set; } = new();
-}   
+}

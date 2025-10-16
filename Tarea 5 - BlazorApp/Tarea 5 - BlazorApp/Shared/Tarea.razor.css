@@ -148,3 +148,20 @@ li.task-card {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.item-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.task-datetime {
+    font-size: 0.85rem;
+    color: #6c757d;
+    white-space: nowrap;
+}
+.tarea-right {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}

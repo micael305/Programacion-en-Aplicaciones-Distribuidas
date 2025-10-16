@@ -14,7 +14,7 @@
     <h4 class="font-semibold text-gray-700 mb-3">Añadir nueva tarea</h4>
     <form @onsubmit="AgregarTarea" id="add-event-form" class="flex flex-col sm:flex-row gap-3">
         <input @bind="nuevaTareaNombre" type="text" id="event-title" placeholder="Título de la tarea" class="flex-grow p-2 border rounded-md focus:ring-2 focus:ring-indigo-500" required>
-        <input type="time" id="event-time" class="p-2 border rounded-md focus:ring-2 focus:ring-indigo-500" required>
+        <input @bind="nuevaTareaDate" type="time" id="event-time" class="p-2 border rounded-md focus:ring-2 focus:ring-indigo-500" required>
         <button type="submit" class="bg-indigo-600 text-white font-semibold px-4 py-2 rounded-md hover:bg-indigo-700 shadow-sm">
             <i class="fas fa-plus mr-2"></i>Añadir
         </button>
@@ -38,13 +38,14 @@
 @code {
     private List<TareaModel> Tareas = new();
     private string nuevaTareaNombre = "";
+    private DateTime? nuevaTareaDate = null;
     protected override void OnInitialized()
     {
         Tareas = new List<TareaModel>
         {
-            new TareaModel { Id = 1, Nombre = "Aprender componentes Blazor", Completada = true },
-            new TareaModel { Id = 2, Nombre = "Crear un modelo de datos" },
-            new TareaModel { Id = 3, Nombre = "Integrar el componente en la página Home" }
+            new TareaModel { Id = 1, Nombre = "Aprender componentes Blazor", Completada = true, FechaHora = new DateTime(2025, 10, 20, 9, 30, 0) },
+            new TareaModel { Id = 2, Nombre = "Crear un modelo de datos", FechaHora = new DateTime(2025, 10, 21, 11, 0, 0) },
+            new TareaModel { Id = 3, Nombre = "Integrar el componente en la página Home", FechaHora = new DateTime(2025, 10, 22, 15, 45, 0) }
         };
     }
 
@@ -53,7 +54,7 @@
         if (!string.IsNullOrWhiteSpace(nuevaTareaNombre))
         {
             int nuevoId = Tareas.Any() ? Tareas.Max(t => t.Id) + 1 : 1;
-            Tareas.Add(new TareaModel { Id = nuevoId, Nombre = nuevaTareaNombre });
+            Tareas.Add(new TareaModel { Id = nuevoId, Nombre = nuevaTareaNombre, FechaHora = nuevaTareaDate });
             nuevaTareaNombre = "";
         }
     }

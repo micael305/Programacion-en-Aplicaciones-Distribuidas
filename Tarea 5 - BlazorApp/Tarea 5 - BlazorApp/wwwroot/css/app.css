@@ -177,7 +177,6 @@ input:focus, select:focus, textarea:focus {
   border-color: rgba(124,58,237,0.28);
 }
 
-/* Tweak bootstrap list-group (if present) */
 ul.list-group {
   padding: 0;
   margin: 0;
