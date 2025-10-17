@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:tns="http://tempuri.org/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:import namespace="http://tempuri.org/DataSet1.xsd" />
+      <s:import schemaLocation="https://localhost:44376/BancoOficial.WebService.asmx?schema=DataSet1" namespace="http://tempuri.org/DataSet1.xsd" />
+      <s:element name="convertirPesosA">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="montoEnPesos" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="monedaDestino" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="convertirPesosAResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="convertirPesosAResult" type="s:decimal" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerTodasLasCotizaciones">
+        <s:complexType />
+      </s:element>
+      <s:element name="ObtenerTodasLasCotizacionesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerTodasLasCotizacionesResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+                <s:attribute fixed="http://tempuri.org/DataSet1.xsd" name="namespace" />
+                <s:attribute fixed="CotizacionDataTable" name="tableTypeName" />
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="convertirPesosASoapIn">
+    <wsdl:part name="parameters" element="tns:convertirPesosA" />
+  </wsdl:message>
+  <wsdl:message name="convertirPesosASoapOut">
+    <wsdl:part name="parameters" element="tns:convertirPesosAResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerTodasLasCotizacionesSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerTodasLasCotizaciones" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerTodasLasCotizacionesSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerTodasLasCotizacionesResponse" />
+  </wsdl:message>
+  <wsdl:portType name="BancoOficial_WebServiceSoap">
+    <wsdl:operation name="convertirPesosA">
+      <wsdl:input message="tns:convertirPesosASoapIn" />
+      <wsdl:output message="tns:convertirPesosASoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerTodasLasCotizaciones">
+      <wsdl:input message="tns:ObtenerTodasLasCotizacionesSoapIn" />
+      <wsdl:output message="tns:ObtenerTodasLasCotizacionesSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BancoOficial_WebServiceSoap" type="tns:BancoOficial_WebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="convertirPesosA">
+      <soap:operation soapAction="http://tempuri.org/convertirPesosA" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerTodasLasCotizaciones">
+      <soap:operation soapAction="http://tempuri.org/ObtenerTodasLasCotizaciones" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BancoOficial_WebServiceSoap12" type="tns:BancoOficial_WebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="convertirPesosA">
+      <soap12:operation soapAction="http://tempuri.org/convertirPesosA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerTodasLasCotizaciones">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerTodasLasCotizaciones" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BancoOficial_WebService">
+    <wsdl:port name="BancoOficial_WebServiceSoap" binding="tns:BancoOficial_WebServiceSoap">
+      <soap:address location="https://localhost:44376/BancoOficial.WebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BancoOficial_WebServiceSoap12" binding="tns:BancoOficial_WebServiceSoap12">
+      <soap12:address location="https://localhost:44376/BancoOficial.WebService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

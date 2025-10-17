@@ -4,25 +4,30 @@
     <section id="calculadora">
                 <div class="converter-container">
                     <h2>Calculadora de Divisas</h2>
+                    <h3>Comprar Divisas</h3>
                     <div class="converter-form">
                         <div class="input-group">
-                            <label for="amount-ars">Monto en Pesos (ARS)</label>
-                            <input type="number" id="amount-ars" placeholder="Ej: 50000">
+                    <label for="amount-ars">Monto en Pesos (ARS)</label>
+                    <asp:TextBox ID="txtMontoARS" runat="server" type="number" placeholder="Ej: 50000"></asp:TextBox>
+                </div>
+
+                <div class="input-group">
+                    <label for="currency-select">Convertir a</label>
+                    <asp:DropDownList ID="ddlMonedaDestino" runat="server">
+                        <asp:ListItem Text="Dólar Estadounidense (USD)" Value="USD"></asp:ListItem>
+                            <asp:ListItem Text="Libra Esterlina (GBP)" Value="GBP"></asp:ListItem>
+                            <asp:ListItem Text="Euro (EUR)" Value="EUR"></asp:ListItem>
+                            <asp:ListItem Text="Real Brasileño (BRL)" Value="BRL"></asp:ListItem>
+                            <asp:ListItem Text="Peso Chileno (CLP)" Value="CLP"></asp:ListItem>
+                            <asp:ListItem Text="Peso Uruguayo (UYU)" Value="UYU"></asp:ListItem>
+                        </asp:DropDownList>
                         </div>
-                        <div class="input-group">
-                            <label for="currency-select">Convertir a</label>
-                            <select id="currency-select">
-                                <option value="930.50">Dólar Estadounidense (USD)</option>
-                                <option value="1020.00">Euro (EUR)</option>
-                                <option value="185.00">Real Brasileño (BRL)</option>
-                                <option value="1.15">Peso Chileno (CLP)</option>
-                                <option value="1180.00">Libra Esterlina (GBP)</option>
-                            </select>
-                        </div>
-                        <button id="convert-btn">Convertir</button>
+                        <asp:Button ID="btnConvertir" runat="server" Text="Convertir" OnClick="btnConvertir_Click" />
                     </div>
                     <div id="result-container" class="result-container">
-                        <p id="conversion-result">El resultado aparecerá aquí.</p>
+                        <p>
+                    <asp:Label ID="lblResultado" runat="server" Text="El resultado aparecerá aquí."></asp:Label>
+                </p>
                     </div>
                 </div>
             </section>
