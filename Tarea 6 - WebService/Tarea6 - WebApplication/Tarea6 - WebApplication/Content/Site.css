@@ -111,7 +111,19 @@ textarea {
 
 
 .converter-container {
-    padding-top: 10px;
+    display: flex; 
+    justify-content: space-around; 
+    gap: 20px; 
+    flex-wrap: wrap;
+}
+
+.comprar-divisas, .vender-divisas {
+    flex: 1; 
+    min-width: 300px; 
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #fdfdfd;
 }
 
 .converter-form {
