@@ -15,28 +15,37 @@ namespace Tarea_6___WebApplication__Web_Service_
     // [System.Web.Script.Services.ScriptService]
     public class BancoOficial_WebService : System.Web.Services.WebService
     {
+        [WebMethod]
+        public decimal convertirPesosA(decimal montoEnPesos, string monedaDestino)
+        {
+            if (string.IsNullOrEmpty(monedaDestino))
+            {
+                return 0;
+            }
 
-        [WebMethod]
-        public string HelloWorld()
-        {
-            return "Hola a todos";
-        }
-        [WebMethod]
-        public decimal pesosALibraEsterlina(decimal montoEnPesos)
-        {
             var adaptador = new CotizacionTableAdapter();
             CotizacionDataTable tabla = adaptador.GetData();
-            var libraRow = tabla.FirstOrDefault(row => row.Moneda.Equals("GBP"));
-            if (libraRow != null)
-            {
-                decimal precioVentaLibra = libraRow.Venta;
 
-                if (precioVentaLibra > 0)
+            var cotizacionRow = tabla.FirstOrDefault(row => row.Moneda.Equals(monedaDestino.ToUpper()));
+
+            if (cotizacionRow != null)
+            {
+                decimal precioVenta = cotizacionRow.Venta;
+
+                if (precioVenta > 0)
                 {
-                    return montoEnPesos / precioVentaLibra;
+                    return montoEnPesos / precioVenta;
                 }
             }
             return 0;
+        }
+        //obtener todas las filas de mi tabla cotizacion
+        [WebMethod]
+        public CotizacionDataTable ObtenerTodasLasCotizaciones()
+        {
+            var adaptador = new CotizacionTableAdapter();
+            CotizacionDataTable tabla = adaptador.GetData();
+            return tabla;
         }
     }
 }
