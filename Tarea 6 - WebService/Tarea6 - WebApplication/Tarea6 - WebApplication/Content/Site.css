@@ -24,7 +24,7 @@ textarea {
     flex: 1;
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Alinea al inicio para ver el contenido desde arriba */
+    align-items: flex-start;
     padding: 40px 20px;
 }
 
