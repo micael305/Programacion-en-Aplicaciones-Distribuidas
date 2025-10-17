@@ -39,6 +39,26 @@ namespace Tarea_6___WebApplication__Web_Service_
             }
             return 0;
         }
+        [WebMethod]
+        public decimal convertirMonedaAPesos(decimal montoEnMoneda, string monedaOrigen)
+        {
+            if (string.IsNullOrEmpty(monedaOrigen))
+            {
+                return 0;
+            }
+            var adaptador = new CotizacionTableAdapter();
+            CotizacionDataTable tabla = adaptador.GetData();
+            var cotizacionRow = tabla.FirstOrDefault(row => row.Moneda.Equals(monedaOrigen.ToUpper()));
+            if (cotizacionRow != null)
+            {
+                decimal precioCompra = cotizacionRow.Compra;
+                if (precioCompra > 0)
+                {
+                    return montoEnMoneda * precioCompra;
+                }
+            }
+            return 0;
+        }
         //obtener todas las filas de mi tabla cotizacion
         [WebMethod]
         public CotizacionDataTable ObtenerTodasLasCotizaciones()

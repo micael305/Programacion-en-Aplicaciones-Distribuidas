@@ -36,7 +36,7 @@
                            <div class="converter-form">
                                <div class="input-group">
                                    <label for="currency-select">Seleccione una Divisa</label>
-                                   <asp:DropDownList ID="DropDownList1" runat="server">
+                                   <asp:DropDownList ID="DropDownList2" runat="server">
                                        <asp:ListItem Text="Dólar Estadounidense (USD)" Value="USD"></asp:ListItem>
                                        <asp:ListItem Text="Libra Esterlina (GBP)" Value="GBP"></asp:ListItem>
                                        <asp:ListItem Text="Euro (EUR)" Value="EUR"></asp:ListItem>
@@ -48,13 +48,13 @@
 
                                <div class="input-group">
                                    <label for="amount-ars">Ingrese un Monto</label>
-                                   <asp:TextBox ID="TextBox1" runat="server" type="number" placeholder="Ej: 50000"></asp:TextBox>
+                                   <asp:TextBox ID="txtMontoDivisa" runat="server" type="number" placeholder="Ej: 100"></asp:TextBox>
                                </div>
-                               <asp:Button ID="Button1" runat="server" Text="Convertir" OnClick="btnConvertir_Click" />
+                               <asp:Button ID="Button2" runat="server" Text="Convertir" OnClick="btnConvertir_Click2" />
                            </div>
-                           <div id="result-container" class="result-container">
+                           <div id="result-container2" class="result-container">
                                <p>
-                                   <asp:Label ID="Label1" runat="server" Text="El resultado aparecerá aquí."></asp:Label>
+                                   <asp:Label ID="lblResultado2" runat="server" Text="El resultado aparecerá aquí."></asp:Label>
                                </p>
                            </div>
                        </div>

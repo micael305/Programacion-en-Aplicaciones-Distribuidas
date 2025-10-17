@@ -22,6 +22,13 @@ namespace Tarea6___WebApplication.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/convertirPesosA", ReplyAction="*")]
         System.Threading.Tasks.Task<decimal> convertirPesosAAsync(decimal montoEnPesos, string monedaDestino);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/convertirMonedaAPesos", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        decimal convertirMonedaAPesos(decimal montoEnMoneda, string monedaOrigen);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/convertirMonedaAPesos", ReplyAction="*")]
+        System.Threading.Tasks.Task<decimal> convertirMonedaAPesosAsync(decimal montoEnMoneda, string monedaOrigen);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerTodasLasCotizaciones", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         DataSet1.CotizacionDataTable ObtenerTodasLasCotizaciones();
@@ -869,6 +876,14 @@ namespace Tarea6___WebApplication.ServiceReference1 {
         
         public System.Threading.Tasks.Task<decimal> convertirPesosAAsync(decimal montoEnPesos, string monedaDestino) {
             return base.Channel.convertirPesosAAsync(montoEnPesos, monedaDestino);
+        }
+        
+        public decimal convertirMonedaAPesos(decimal montoEnMoneda, string monedaOrigen) {
+            return base.Channel.convertirMonedaAPesos(montoEnMoneda, monedaOrigen);
+        }
+        
+        public System.Threading.Tasks.Task<decimal> convertirMonedaAPesosAsync(decimal montoEnMoneda, string monedaOrigen) {
+            return base.Channel.convertirMonedaAPesosAsync(montoEnMoneda, monedaOrigen);
         }
         
         public DataSet1.CotizacionDataTable ObtenerTodasLasCotizaciones() {

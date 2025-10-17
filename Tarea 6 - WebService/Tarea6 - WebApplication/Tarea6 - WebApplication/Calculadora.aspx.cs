@@ -43,5 +43,37 @@ namespace Tarea6___WebApplication
                 lblResultado.Text = "Por favor, ingrese un monto válido.";
             }
         }
+        protected void btnConvertir_Click2(object sender, EventArgs e)
+        {
+            if (decimal.TryParse(txtMontoDivisa.Text, out decimal montoEnDivisaExtanjera))
+            {
+                try
+                {
+                    string monedaOrigen = ddlMonedaDestino.SelectedValue;
+
+                    var proxy = new ServiceReference1.BancoOficial_WebServiceSoapClient();
+
+                    decimal resultado = proxy.convertirMonedaAPesos(montoEnDivisaExtanjera, monedaOrigen);
+
+                    if (resultado > 0)
+                    {
+                        lblResultado2.Text = $"El monto es {resultado:N2} ARS";
+                    }
+                    else
+                    {
+                        lblResultado2.Text = "No se pudo realizar la conversión. Verifique la moneda.";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    lblResultado2.Text = "Error al conectar con el servicio: " + ex.Message;
+                }
+            }
+            else
+            {
+                lblResultado2.Text = "Por favor, ingrese un monto válido.";
+            }
+        }
+
     }
 }

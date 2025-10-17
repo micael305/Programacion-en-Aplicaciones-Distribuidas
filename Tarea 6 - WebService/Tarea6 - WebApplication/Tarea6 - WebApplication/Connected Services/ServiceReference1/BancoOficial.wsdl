@@ -19,6 +19,21 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="convertirMonedaAPesos">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="montoEnMoneda" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="monedaOrigen" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="convertirMonedaAPesosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="convertirMonedaAPesosResult" type="s:decimal" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="ObtenerTodasLasCotizaciones">
         <s:complexType />
       </s:element>
@@ -46,6 +61,12 @@
   <wsdl:message name="convertirPesosASoapOut">
     <wsdl:part name="parameters" element="tns:convertirPesosAResponse" />
   </wsdl:message>
+  <wsdl:message name="convertirMonedaAPesosSoapIn">
+    <wsdl:part name="parameters" element="tns:convertirMonedaAPesos" />
+  </wsdl:message>
+  <wsdl:message name="convertirMonedaAPesosSoapOut">
+    <wsdl:part name="parameters" element="tns:convertirMonedaAPesosResponse" />
+  </wsdl:message>
   <wsdl:message name="ObtenerTodasLasCotizacionesSoapIn">
     <wsdl:part name="parameters" element="tns:ObtenerTodasLasCotizaciones" />
   </wsdl:message>
@@ -57,6 +78,10 @@
       <wsdl:input message="tns:convertirPesosASoapIn" />
       <wsdl:output message="tns:convertirPesosASoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="convertirMonedaAPesos">
+      <wsdl:input message="tns:convertirMonedaAPesosSoapIn" />
+      <wsdl:output message="tns:convertirMonedaAPesosSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="ObtenerTodasLasCotizaciones">
       <wsdl:input message="tns:ObtenerTodasLasCotizacionesSoapIn" />
       <wsdl:output message="tns:ObtenerTodasLasCotizacionesSoapOut" />
@@ -66,6 +91,15 @@
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="convertirPesosA">
       <soap:operation soapAction="http://tempuri.org/convertirPesosA" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="convertirMonedaAPesos">
+      <soap:operation soapAction="http://tempuri.org/convertirMonedaAPesos" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -87,6 +121,15 @@
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="convertirPesosA">
       <soap12:operation soapAction="http://tempuri.org/convertirPesosA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="convertirMonedaAPesos">
+      <soap12:operation soapAction="http://tempuri.org/convertirMonedaAPesos" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
