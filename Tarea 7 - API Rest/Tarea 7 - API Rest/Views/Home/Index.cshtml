@@ -1,0 +1,27 @@
+﻿@using Tarea_7___API_Rest.Models  
+@model IEnumerable<Personaje>
+
+@{
+    ViewData["Title"] = "Listado de Personajes";
+}
+
+<h3>Listado de Personajes (desde API)</h3>
+
+<hr />
+
+@if (Model.Any())
+{
+    @foreach (Personaje p in Model)
+    {
+        <div style="margin-bottom: 15px; border: 1px solid #ccc; padding: 10px;">
+            <h4>@p.id. @p.name</h4>
+            <div>
+                <img src="@p.image" alt="Imagen de @p.name" style="max-width: 100px;" />
+            </div>
+        </div>
+    }
+}
+else
+{
+    <p>No se encontraron personajes.</p>
+}
