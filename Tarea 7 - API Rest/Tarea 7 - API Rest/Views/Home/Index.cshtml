@@ -1,27 +1,48 @@
 ﻿@using Tarea_7___API_Rest.Models  
-@model IEnumerable<Personaje>
+@model IEnumerable<Medicamento>
 
 @{
-    ViewData["Title"] = "Listado de Personajes";
+    ViewData["Title"] = "Listado de Medicamentos";
 }
 
-<h3>Listado de Personajes (desde API)</h3>
+<h3>Listado de Medicamentos</h3>
 
 <hr />
 
+@if (ViewData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @ViewData["ErrorMessage"]
+    </div>
+}
+
 @if (Model.Any())
 {
-    @foreach (Personaje p in Model)
-    {
-        <div style="margin-bottom: 15px; border: 1px solid #ccc; padding: 10px;">
-            <h4>@p.id. @p.name</h4>
-            <div>
-                <img src="@p.image" alt="Imagen de @p.name" style="max-width: 100px;" />
-            </div>
-        </div>
-    }
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Laboratorio</th>
+                <th>Precio</th>
+                <th>Stock</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Medicamento med in Model)
+            {
+                <tr>
+                    <td>@med.Id</td>
+                    <td>@med.Nombre</td>
+                    <td>@med.Laboratorio</td>
+                    <td>$ @med.Precio.ToString("0.00")</td>
+                    <td>@med.Stock unidades</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
-else
+else if (ViewData["ErrorMessage"] == null)
 {
-    <p>No se encontraron personajes.</p>
+    <p>No se encontraron medicamentos.</p>
 }
